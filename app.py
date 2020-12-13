@@ -1,8 +1,13 @@
 from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 
+from dotenv import load_dotenv
+load_dotenv()
+
+import os
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://postgres@localhost:5432/dontdoapp'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 db = SQLAlchemy(app)
 
 class Todo(db.Model):
